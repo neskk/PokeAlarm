@@ -444,6 +444,12 @@ class Manager(object):
             return
 
         # TODO: More filtering?
+        # Maybe also filter based on mode.
+        # Accept a list of status codes for filtering instead of single
+        # Have different messages for each status code
+        if self.__captcha_filter['status'] != captcha['status']:
+            log.debug("Captcha ignored: '%s' status ignored.", captcha['status'])
+            return
 
         threads = []
         # Spawn notifications in threads so they can work in background
@@ -484,7 +490,7 @@ class Manager(object):
         # Set up Gym filter
         self.set_gyms(filters.get('gyms', {}))
 
-        # Set uo Captcha filters
+        # Set up Captcha filters
         self.set_captchas(filters.get('captchas', {}))
 
     # Update the pokemon according to settings
@@ -579,7 +585,10 @@ class Manager(object):
         self.__gym_filter = gyms
 
     def set_captchas(self, settings):
-        captcha = {"enabled": bool(parse_boolean(settings.pop('enabled', False)))}
+        captcha = {
+            "enabled": bool(parse_boolean(settings.pop('enabled', False))),
+            "status": str(settings.pop('status', None))
+        }
         log.info("Captchas settings: {}".format(captcha))
         self.__captcha_filter = captcha
 

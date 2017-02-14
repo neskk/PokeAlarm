@@ -113,6 +113,19 @@ class RocketMap:
             'time': str(data['time'])
         }
         return captcha
+
+    @staticmethod
+    def scheduler(data):
+        log.debug("Converting to scheduler: \n {}".format(data))
+        scheduler = {
+            'type': "scheduler",
+            'id': "scheduler",
+            'scanner_name': str(data['instance']),
+            'mode': str(data['name']),
+            'tth_found': str(data['tth_found']),
+            'spawns_found': str(data['spawns_found'])
+        }
+        return scheduler
 ########################################################################################################################
 
 
