@@ -579,7 +579,7 @@ class Manager(object):
         self.__gym_filter = gyms
 
     def set_captchas(self, settings):
-        captcha = {  "enabled": bool(parse_boolean(settings.pop('enabled', False))) }
+        captcha = {"enabled": bool(parse_boolean(settings.pop('enabled', False)))}
         log.info("Captchas settings: {}".format(captcha))
         self.__captcha_filter = captcha
 

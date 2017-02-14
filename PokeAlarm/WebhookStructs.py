@@ -31,7 +31,7 @@ class RocketMap:
             elif kind == 'captcha':
                 return RocketMap.captcha(msg)
             elif data['type'] in ['scheduler']:  # Unsupported Webhooks
-                log.debug("{} webhook received. This captcha is not yet supported at this time. ")
+                log.debug("{} webhook received. This message is not yet supported at this time. ")
             else:
                 log.error("Invalid type specified ({}). Are you using the correct map type?".format(kind))
         except Exception as e:
@@ -107,6 +107,7 @@ class RocketMap:
             'id': "captcha",
             'scanner_name': str(data['status_name']),
             'mode': str(data['mode']),
+            'status': str(data['status']),
             'account': str(data['account']),
             'captcha_count': str(data['captcha']),
             'time': str(data['time'])
